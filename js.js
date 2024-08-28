@@ -1,18 +1,23 @@
 const form = document.querySelector("form");
-const areatask = document.querySelector("#elementitask");
+const tasklist = document.querySelector("#elementitask ol");
 
-const funzione = function () {
-  const tasks = document.querySelector(".elementitask");
-  tasks.forEach((task) => (task = alert("HAI CLICCATO IL TASK")));
-};
 form.onsubmit = function (event) {
   event.preventDefault();
   const newtask = document.querySelector("#newtask");
   const valortask = newtask.value;
-  const aggtask = document.createElement("elementitask");
+  const li = document.createElement("li");
 
-  aggtask.innerText = valortask;
-  areatask.appendChild(aggtask);
-  aggtask.addEventListener("click", funzione);
-  form.reset;
+  li.innerText = valortask;
+  li.onclick = function (event) {
+    event.currentTarget.style.textDecoration = "line-through";
+  };
+
+  const delbutton = document.createElement("button");
+  delbutton.innerText = "delete";
+  delbutton.onclick = function (event) {
+    event.currentTarget.parentNode.remove();
+  };
+  li.appendChild(delbutton);
+  tasklist.appendChild(li);
+  form.reset();
 };
